@@ -3,6 +3,7 @@ package com.study.commerce_lab.application;
 import com.study.commerce_lab.adapter.webapi.ProductRegisterResponse;
 import com.study.commerce_lab.application.provided.ProductRegister;
 import com.study.commerce_lab.application.required.ProductRepository;
+import com.study.commerce_lab.domain.product.DuplicateSkuException;
 import com.study.commerce_lab.domain.product.Product;
 import com.study.commerce_lab.domain.product.ProductRegisterRequest;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +18,19 @@ public class ProductModifyService implements ProductRegister {
 
     @Override
     public ProductRegisterResponse registerProduct(ProductRegisterRequest request) {
+        checkDuplicateSku(request);
+
         Product product = Product.create(request);
 
         Product save = productRepository.save(product);
 
         return new ProductRegisterResponse(save.getId(), save.getSku(),
                 save.getName(), save.getPrice(), save.getStockQuantity());
+    }
+
+    private void checkDuplicateSku(ProductRegisterRequest request) {
+        if(productRepository.findBySku(request.sku()).isPresent()){
+            throw new DuplicateSkuException("이미 사용중인 SKU: " + request.sku());
+        }
     }
 }

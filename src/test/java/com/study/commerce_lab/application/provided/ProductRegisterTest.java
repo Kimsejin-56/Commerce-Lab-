@@ -1,6 +1,8 @@
 package com.study.commerce_lab.application.provided;
 
 import com.study.commerce_lab.adapter.webapi.ProductRegisterResponse;
+import com.study.commerce_lab.application.required.ProductRepository;
+import com.study.commerce_lab.domain.product.DuplicateSkuException;
 import com.study.commerce_lab.domain.product.Product;
 import com.study.commerce_lab.domain.product.ProductRegisterRequest;
 import org.assertj.core.api.Assertions;
@@ -20,10 +22,16 @@ class ProductRegisterTest {
 
     @Test
     void registerProduct(){
-        ProductRegisterRequest request = new ProductRegisterRequest("APPLE-001", "아이폰 17", 1200000, 100);
-
-        ProductRegisterResponse response = productRegister.registerProduct(request);
+        ProductRegisterResponse response = productRegister.registerProduct(new ProductRegisterRequest("APPLE-001", "아이폰 17", 1200000, 100));
 
         Assertions.assertThat(response.getId()).isNotNull();
+    }
+
+    @Test
+    void duplicateSkuFail(){
+        productRegister.registerProduct(new ProductRegisterRequest("APPLE-001", "아이폰 17", 1200000, 100));
+
+        Assertions.assertThatThrownBy(() -> productRegister.registerProduct(new ProductRegisterRequest("APPLE-001", "아이폰 17", 1200000, 100)))
+            .isInstanceOf(DuplicateSkuException.class);
     }
 }
