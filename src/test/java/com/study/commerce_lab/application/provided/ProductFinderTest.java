@@ -1,6 +1,7 @@
 package com.study.commerce_lab.application.provided;
 
-import com.study.commerce_lab.application.required.ProductRepository;
+import com.study.commerce_lab.application.port.in.ProductFinder;
+import com.study.commerce_lab.application.port.out.ProductRepository;
 import com.study.commerce_lab.domain.product.Product;
 import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import org.junit.jupiter.api.Test;

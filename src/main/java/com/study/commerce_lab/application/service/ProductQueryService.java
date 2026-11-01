@@ -1,7 +1,7 @@
-package com.study.commerce_lab.application;
+package com.study.commerce_lab.application.service;
 
-import com.study.commerce_lab.application.provided.ProductFinder;
-import com.study.commerce_lab.application.required.ProductRepository;
+import com.study.commerce_lab.application.port.in.ProductFinder;
+import com.study.commerce_lab.application.port.out.ProductRepository;
 import com.study.commerce_lab.domain.product.Product;
 import com.study.commerce_lab.domain.product.exception.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;

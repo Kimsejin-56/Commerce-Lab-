@@ -2,6 +2,12 @@ spring:
   application:
     name: commerce-lab
 
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3308/commerce?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul}
+    username: ${DB_USERNAME:spring}
+    password: ${DB_PASSWORD:secret}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     open-in-view: false
     hibernate:

@@ -1,8 +1,7 @@
-package com.study.commerce_lab.application;
+package com.study.commerce_lab.application.service;
 
-import com.study.commerce_lab.adapter.webapi.reponse.ProductRegisterResponse;
-import com.study.commerce_lab.application.provided.ProductRegister;
-import com.study.commerce_lab.application.required.ProductRepository;
+import com.study.commerce_lab.application.port.in.ProductRegister;
+import com.study.commerce_lab.application.port.out.ProductRepository;
 import com.study.commerce_lab.domain.product.Product;
 import com.study.commerce_lab.domain.product.exception.DuplicateSkuException;
 import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
@@ -17,15 +16,12 @@ public class ProductModifyService implements ProductRegister {
     private final ProductRepository productRepository;
 
     @Override
-    public ProductRegisterResponse registerProduct(ProductRegisterRequest request) {
+    public Product registerProduct(ProductRegisterRequest request) {
         checkDuplicateSku(request);
 
         Product product = Product.create(request);
 
-        Product save = productRepository.save(product);
-
-        return new ProductRegisterResponse(save.getId(), save.getSku(),
-                save.getName(), save.getPrice(), save.getStockQuantity());
+        return productRepository.save(product);
     }
 
     private void checkDuplicateSku(ProductRegisterRequest request) {

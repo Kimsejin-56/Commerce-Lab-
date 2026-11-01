@@ -1,8 +1,8 @@
-package com.study.commerce_lab.adapter.webapi;
+package com.study.commerce_lab.adapter.in.webapi;
 
-import com.study.commerce_lab.adapter.webapi.reponse.ProductRegisterResponse;
-import com.study.commerce_lab.application.provided.ProductFinder;
-import com.study.commerce_lab.application.provided.ProductRegister;
+import com.study.commerce_lab.adapter.in.webapi.reponse.ProductRegisterResponse;
+import com.study.commerce_lab.application.port.in.ProductFinder;
+import com.study.commerce_lab.application.port.in.ProductRegister;
 import com.study.commerce_lab.domain.product.Product;
 import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import jakarta.validation.Valid;
@@ -20,8 +20,16 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductRegisterResponse> registerProduct(@Valid @RequestBody ProductRegisterRequest request) {
+        Product product = productRegister.registerProduct(request);
+
         return ResponseEntity.status(201)
-                .body(productRegister.registerProduct(request));
+                .body(new ProductRegisterResponse(
+                        product.getId(),
+                        product.getSku(),
+                        product.getName(),
+                        product.getPrice(),
+                        product.getStockQuantity()
+                ));
     }
 
     @GetMapping("/{id}")

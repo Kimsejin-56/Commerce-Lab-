@@ -1,4 +1,4 @@
-package com.study.commerce_lab.adapter.webapi.exception;
+package com.study.commerce_lab.adapter.in.webapi.exception;
 
 import com.study.commerce_lab.domain.product.exception.DuplicateSkuException;
 import com.study.commerce_lab.domain.product.exception.ProductNotFoundException;
