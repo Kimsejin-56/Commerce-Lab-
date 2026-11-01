@@ -3,6 +3,7 @@ package com.study.commerce_lab.application;
 import com.study.commerce_lab.application.provided.ProductFinder;
 import com.study.commerce_lab.application.required.ProductRepository;
 import com.study.commerce_lab.domain.product.Product;
+import com.study.commerce_lab.domain.product.exception.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,6 @@ public class ProductQueryService implements ProductFinder {
     @Override
     public Product findProductById(Long id) {
         return productRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다. productId=" + id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
     }
 }
