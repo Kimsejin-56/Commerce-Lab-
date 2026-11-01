@@ -5,10 +5,13 @@ import com.study.commerce_lab.domain.product.exception.ProductNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.net.URI;
+import java.util.List;
+import java.util.Objects;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -41,6 +44,32 @@ public class GlobalExceptionHandler {
                 "DUPLICATE_SKU",
                 request
         );
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ProblemDetail handleInvalidRequest(
+            MethodArgumentNotValidException e,
+            HttpServletRequest request
+    ) {
+        ProblemDetail problemDetail = createProblemDetail(
+                HttpStatus.BAD_REQUEST,
+                "Invalid Input",
+                "요청 값이 올바르지 않습니다.",
+                "invalid-input",
+                "INVALID_INPUT",
+                request
+        );
+
+        List<ValidationError> errors = e.getBindingResult()
+                .getFieldErrors().stream()
+                .map(error -> new ValidationError(error.getField(),
+                        Objects.requireNonNullElse(error.getDefaultMessage(),
+                                "잘못된 입력입니다.")))
+                .toList();
+
+        problemDetail.setProperty("errors", errors);
+
+        return problemDetail;
     }
 
     private ProblemDetail createProblemDetail(
