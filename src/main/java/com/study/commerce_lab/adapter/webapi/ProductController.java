@@ -1,10 +1,10 @@
 package com.study.commerce_lab.adapter.webapi;
 
-import com.study.commerce_lab.application.ProductModifyService;
+import com.study.commerce_lab.adapter.webapi.reponse.ProductRegisterResponse;
 import com.study.commerce_lab.application.provided.ProductFinder;
 import com.study.commerce_lab.application.provided.ProductRegister;
 import com.study.commerce_lab.domain.product.Product;
-import com.study.commerce_lab.domain.product.ProductRegisterRequest;
+import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

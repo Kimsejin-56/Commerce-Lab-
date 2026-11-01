@@ -1,4 +1,4 @@
-package com.study.commerce_lab.adapter.webapi;
+package com.study.commerce_lab.adapter.webapi.reponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

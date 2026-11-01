@@ -1,17 +1,13 @@
 package com.study.commerce_lab.application.provided;
 
-import com.study.commerce_lab.adapter.webapi.ProductRegisterResponse;
-import com.study.commerce_lab.application.required.ProductRepository;
-import com.study.commerce_lab.domain.product.DuplicateSkuException;
-import com.study.commerce_lab.domain.product.Product;
-import com.study.commerce_lab.domain.product.ProductRegisterRequest;
+import com.study.commerce_lab.adapter.webapi.reponse.ProductRegisterResponse;
+import com.study.commerce_lab.domain.product.exception.DuplicateSkuException;
+import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
 @SpringBootTest

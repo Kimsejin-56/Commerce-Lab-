@@ -1,4 +1,4 @@
-package com.study.commerce_lab.domain.product;
+package com.study.commerce_lab.domain;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

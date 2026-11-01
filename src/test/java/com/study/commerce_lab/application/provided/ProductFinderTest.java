@@ -2,15 +2,15 @@ package com.study.commerce_lab.application.provided;
 
 import com.study.commerce_lab.application.required.ProductRepository;
 import com.study.commerce_lab.domain.product.Product;
-import com.study.commerce_lab.domain.product.ProductRegisterRequest;
-import org.assertj.core.api.Assertions;
+import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
+@Transactional
 @SpringBootTest
 class ProductFinderTest {
 

@@ -1,10 +1,9 @@
 package com.study.commerce_lab.domain.product;
 
-import org.assertj.core.api.Assertions;
+import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class ProductTest {
 

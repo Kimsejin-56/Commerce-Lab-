@@ -1,11 +1,11 @@
 package com.study.commerce_lab.application;
 
-import com.study.commerce_lab.adapter.webapi.ProductRegisterResponse;
+import com.study.commerce_lab.adapter.webapi.reponse.ProductRegisterResponse;
 import com.study.commerce_lab.application.provided.ProductRegister;
 import com.study.commerce_lab.application.required.ProductRepository;
-import com.study.commerce_lab.domain.product.DuplicateSkuException;
 import com.study.commerce_lab.domain.product.Product;
-import com.study.commerce_lab.domain.product.ProductRegisterRequest;
+import com.study.commerce_lab.domain.product.exception.DuplicateSkuException;
+import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

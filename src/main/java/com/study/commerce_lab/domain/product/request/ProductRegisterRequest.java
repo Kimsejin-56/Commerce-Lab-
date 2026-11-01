@@ -1,4 +1,4 @@
-package com.study.commerce_lab.domain.product;
+package com.study.commerce_lab.domain.product.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
