@@ -6,6 +6,7 @@ import com.study.commerce_lab.application.port.in.ProductRegister;
 import com.study.commerce_lab.domain.product.Product;
 import com.study.commerce_lab.domain.product.exception.DuplicateSkuException;
 import com.study.commerce_lab.adapter.in.webapi.request.ProductRegisterRequest;
+import com.study.commerce_lab.domain.product.exception.StockQuantityExceededException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,12 +40,21 @@ class ProductRegisterTest {
     @Test
     void addStockQuantity(){
         Product product = productRegister.registerProduct(
-                new ProductRegisterRequest("APPLE-001", "아이폰 17", 1200000, 100));
+                new ProductRegisterRequest("APPLE-002", "아이폰 17", 1200000, 100));
 
         AddStockQuantityResponse response =
                 productRegister.addStockQuantity(product.getId(), new AddStockQuantityRequest(30));
 
         assertThat(response).isNotNull();
         assertThat(response.stockQuantity()).isEqualTo(130);
+    }
+
+    @Test
+    void addStockQuantityFail(){
+        Product product = productRegister.registerProduct(
+                new ProductRegisterRequest("APPLE-002", "아이폰 17", 1200000, 100));
+
+        assertThatThrownBy(() -> productRegister.addStockQuantity(product.getId(), new AddStockQuantityRequest(999999)))
+            .isInstanceOf(StockQuantityExceededException.class);
     }
 }
