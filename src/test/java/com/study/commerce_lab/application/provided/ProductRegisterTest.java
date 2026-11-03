@@ -1,7 +1,7 @@
 package com.study.commerce_lab.application.provided;
 
-import com.study.commerce_lab.adapter.in.webapi.reponse.AddStockQuantityResponse;
-import com.study.commerce_lab.adapter.in.webapi.request.AddStockQuantityRequest;
+import com.study.commerce_lab.adapter.in.webapi.reponse.IncreaseStockQuantityResponse;
+import com.study.commerce_lab.adapter.in.webapi.request.IncreaseStockQuantityRequest;
 import com.study.commerce_lab.application.port.in.ProductRegister;
 import com.study.commerce_lab.domain.product.Product;
 import com.study.commerce_lab.domain.product.exception.DuplicateSkuException;
@@ -38,23 +38,23 @@ class ProductRegisterTest {
     }
 
     @Test
-    void addStockQuantity(){
+    void increaseStockQuantity(){
         Product product = productRegister.registerProduct(
                 new ProductRegisterRequest("APPLE-002", "아이폰 17", 1200000, 100));
 
-        AddStockQuantityResponse response =
-                productRegister.addStockQuantity(product.getId(), new AddStockQuantityRequest(30));
+        IncreaseStockQuantityResponse response =
+                productRegister.increaseStockQuantity(product.getId(), new IncreaseStockQuantityRequest(30));
 
         assertThat(response).isNotNull();
         assertThat(response.stockQuantity()).isEqualTo(130);
     }
 
     @Test
-    void addStockQuantityFail(){
+    void increaseStockQuantityFail(){
         Product product = productRegister.registerProduct(
                 new ProductRegisterRequest("APPLE-002", "아이폰 17", 1200000, 100));
 
-        assertThatThrownBy(() -> productRegister.addStockQuantity(product.getId(), new AddStockQuantityRequest(999999)))
+        assertThatThrownBy(() -> productRegister.increaseStockQuantity(product.getId(), new IncreaseStockQuantityRequest(999999)))
             .isInstanceOf(StockQuantityExceededException.class);
     }
 }

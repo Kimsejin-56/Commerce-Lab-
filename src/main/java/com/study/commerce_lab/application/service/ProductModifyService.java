@@ -1,7 +1,7 @@
 package com.study.commerce_lab.application.service;
 
-import com.study.commerce_lab.adapter.in.webapi.reponse.AddStockQuantityResponse;
-import com.study.commerce_lab.adapter.in.webapi.request.AddStockQuantityRequest;
+import com.study.commerce_lab.adapter.in.webapi.reponse.IncreaseStockQuantityResponse;
+import com.study.commerce_lab.adapter.in.webapi.request.IncreaseStockQuantityRequest;
 import com.study.commerce_lab.application.port.in.ProductFinder;
 import com.study.commerce_lab.application.port.in.ProductRegister;
 import com.study.commerce_lab.application.port.out.ProductRepository;
@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ProductModifyService implements ProductRegister {
     private final ProductRepository productRepository;
-    private final ProductFinder productFinder;
 
     @Override
     public Product registerProduct(ProductRegisterRequest request) {
@@ -31,16 +30,16 @@ public class ProductModifyService implements ProductRegister {
     }
 
     @Override
-    public AddStockQuantityResponse addStockQuantity(Long productId, AddStockQuantityRequest request) {
+    public IncreaseStockQuantityResponse increaseStockQuantity(Long productId, IncreaseStockQuantityRequest request) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId));
 
-        product.addStockQuantity(request.quantity());
+        product.increaseStockQuantity(request.quantity());
 
         if(product.getStockQuantity() > 1000000)
             throw new StockQuantityExceededException("재고 수량 초과입니다.");
 
-        return new AddStockQuantityResponse(product.getId(), product.getStockQuantity());
+        return new IncreaseStockQuantityResponse(product.getId(), product.getStockQuantity());
     }
 
     private void checkDuplicateSku(ProductRegisterRequest request) {
