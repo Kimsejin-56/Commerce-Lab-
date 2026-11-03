@@ -1,5 +1,6 @@
 package com.study.commerce_lab.adapter.in.webapi.exception;
 
+import com.study.commerce_lab.domain.product.exception.InsufficientStockException;
 import com.study.commerce_lab.domain.product.exception.StockQuantityExceededException;
 import com.study.commerce_lab.domain.product.exception.DuplicateSkuException;
 import com.study.commerce_lab.domain.product.exception.ProductNotFoundException;
@@ -58,6 +59,21 @@ public class GlobalExceptionHandler {
                 e.getMessage(),
                 "exeed-stock-quantity",
                 "EXCEED_STOCK_QUANTITY",
+                request
+        );
+    }
+
+    @ExceptionHandler(InsufficientStockException.class)
+    public ProblemDetail handInsufficientStockQuantity(
+            InsufficientStockException e,
+            HttpServletRequest request
+    ){
+        return createProblemDetail(
+                HttpStatus.CONFLICT,
+                "Insufficient Stock Quantity",
+                e.getMessage(),
+                "insufficient-stock-quantity",
+                "INSUFFICIENT_STOCK_QUANTITY",
                 request
         );
     }

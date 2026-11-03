@@ -1,7 +1,9 @@
 package com.study.commerce_lab.adapter.in.webapi;
 
+import com.study.commerce_lab.adapter.in.webapi.reponse.DecreaseStockQuantityResponse;
 import com.study.commerce_lab.adapter.in.webapi.reponse.ProductRegisterResponse;
 import com.study.commerce_lab.adapter.in.webapi.reponse.IncreaseStockQuantityResponse;
+import com.study.commerce_lab.adapter.in.webapi.request.DecreaseStockQuantityRequest;
 import com.study.commerce_lab.adapter.in.webapi.request.IncreaseStockQuantityRequest;
 import com.study.commerce_lab.application.port.in.ProductFinder;
 import com.study.commerce_lab.application.port.in.ProductRegister;
@@ -44,5 +46,11 @@ public class ProductController {
     public ResponseEntity<IncreaseStockQuantityResponse> increaseStockQuantity(@PathVariable Long id, @Valid @RequestBody IncreaseStockQuantityRequest request) {
         return ResponseEntity.ok()
                 .body(productRegister.increaseStockQuantity(id, request));
+    }
+
+    @PostMapping("/{id}/stock/decrease")
+    public ResponseEntity<DecreaseStockQuantityResponse> addStockQuantity(@PathVariable Long id, @Valid @RequestBody DecreaseStockQuantityRequest request) {
+        return ResponseEntity.ok()
+                .body(productRegister.decreaseStockQuantity(id, request));
     }
 }

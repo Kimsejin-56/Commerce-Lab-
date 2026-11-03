@@ -23,7 +23,7 @@ class ProductFinderTest {
 
     @Test
     void findById(){
-        Product product = Product.create(new ProductRegisterRequest("APPLE-001", "아이폰 17", 1200000, 100));
+        Product product = Product.create(new ProductRegisterRequest("APPLE-1", "아이폰 17", 1200000, 100));
 
         productRepository.save(product);
 

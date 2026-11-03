@@ -2,6 +2,8 @@ package com.study.commerce_lab.domain.product;
 
 import com.study.commerce_lab.domain.BaseEntity;
 import com.study.commerce_lab.adapter.in.webapi.request.ProductRegisterRequest;
+import com.study.commerce_lab.domain.product.exception.InsufficientStockException;
+import com.study.commerce_lab.domain.product.exception.StockQuantityExceededException;
 import jakarta.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -36,6 +38,16 @@ public class Product extends BaseEntity {
     }
 
     public void increaseStockQuantity(int stockQuantity){
+        if(this.stockQuantity + stockQuantity > 1000000)
+            throw new StockQuantityExceededException("재고 수량 초과입니다.");
+
         this.stockQuantity+=stockQuantity;
+    }
+
+    public void decreaseStockQuantity(int stockQuantity){
+        if (this.stockQuantity < stockQuantity)
+            throw new InsufficientStockException("재고가 부족합니다.");
+
+        this.stockQuantity-=stockQuantity;
     }
 }

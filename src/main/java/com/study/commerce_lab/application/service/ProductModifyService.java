@@ -1,6 +1,8 @@
 package com.study.commerce_lab.application.service;
 
+import com.study.commerce_lab.adapter.in.webapi.reponse.DecreaseStockQuantityResponse;
 import com.study.commerce_lab.adapter.in.webapi.reponse.IncreaseStockQuantityResponse;
+import com.study.commerce_lab.adapter.in.webapi.request.DecreaseStockQuantityRequest;
 import com.study.commerce_lab.adapter.in.webapi.request.IncreaseStockQuantityRequest;
 import com.study.commerce_lab.application.port.in.ProductFinder;
 import com.study.commerce_lab.application.port.in.ProductRegister;
@@ -36,10 +38,17 @@ public class ProductModifyService implements ProductRegister {
 
         product.increaseStockQuantity(request.quantity());
 
-        if(product.getStockQuantity() > 1000000)
-            throw new StockQuantityExceededException("재고 수량 초과입니다.");
-
         return new IncreaseStockQuantityResponse(product.getId(), product.getStockQuantity());
+    }
+
+    @Override
+    public DecreaseStockQuantityResponse decreaseStockQuantity(Long productId, DecreaseStockQuantityRequest request) {
+        Product product=productRepository.findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException(productId));
+
+        product.decreaseStockQuantity(request.quantity());
+
+        return new DecreaseStockQuantityResponse(product.getId(), product.getStockQuantity());
     }
 
     private void checkDuplicateSku(ProductRegisterRequest request) {
