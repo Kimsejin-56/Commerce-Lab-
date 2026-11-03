@@ -1,6 +1,6 @@
 package com.study.commerce_lab.domain.product;
 
-import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
+import com.study.commerce_lab.adapter.in.webapi.request.ProductRegisterRequest;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

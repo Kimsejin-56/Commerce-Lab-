@@ -1,7 +1,7 @@
 package com.study.commerce_lab.domain.product;
 
 import com.study.commerce_lab.domain.BaseEntity;
-import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
+import com.study.commerce_lab.adapter.in.webapi.request.ProductRegisterRequest;
 import jakarta.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -33,5 +33,9 @@ public class Product extends BaseEntity {
         product.stockQuantity=request.stockQuantity();
 
         return product;
+    }
+
+    public void addStockQuantity(int stockQuantity){
+        this.stockQuantity+=stockQuantity;
     }
 }

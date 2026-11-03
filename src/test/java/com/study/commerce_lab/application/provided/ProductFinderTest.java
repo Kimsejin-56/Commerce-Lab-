@@ -3,7 +3,7 @@ package com.study.commerce_lab.application.provided;
 import com.study.commerce_lab.application.port.in.ProductFinder;
 import com.study.commerce_lab.application.port.out.ProductRepository;
 import com.study.commerce_lab.domain.product.Product;
-import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
+import com.study.commerce_lab.adapter.in.webapi.request.ProductRegisterRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

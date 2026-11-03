@@ -1,10 +1,15 @@
 package com.study.commerce_lab.application.service;
 
+import com.study.commerce_lab.adapter.in.webapi.reponse.AddStockQuantityResponse;
+import com.study.commerce_lab.adapter.in.webapi.request.AddStockQuantityRequest;
+import com.study.commerce_lab.application.port.in.ProductFinder;
 import com.study.commerce_lab.application.port.in.ProductRegister;
 import com.study.commerce_lab.application.port.out.ProductRepository;
 import com.study.commerce_lab.domain.product.Product;
 import com.study.commerce_lab.domain.product.exception.DuplicateSkuException;
-import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
+import com.study.commerce_lab.adapter.in.webapi.request.ProductRegisterRequest;
+import com.study.commerce_lab.domain.product.exception.ProductNotFoundException;
+import com.study.commerce_lab.domain.product.exception.StockQuantityExceededException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ProductModifyService implements ProductRegister {
     private final ProductRepository productRepository;
+    private final ProductFinder productFinder;
 
     @Override
     public Product registerProduct(ProductRegisterRequest request) {
@@ -22,6 +28,19 @@ public class ProductModifyService implements ProductRegister {
         Product product = Product.create(request);
 
         return productRepository.save(product);
+    }
+
+    @Override
+    public AddStockQuantityResponse addStockQuantity(Long productId, AddStockQuantityRequest request) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException(productId));
+
+        product.addStockQuantity(request.quantity());
+
+        if(product.getStockQuantity() > 1000000)
+            throw new StockQuantityExceededException("재고 수량 초과입니다.");
+
+        return new AddStockQuantityResponse(product.getId(), product.getStockQuantity());
     }
 
     private void checkDuplicateSku(ProductRegisterRequest request) {

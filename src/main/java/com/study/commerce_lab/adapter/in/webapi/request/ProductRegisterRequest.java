@@ -1,4 +1,4 @@
-package com.study.commerce_lab.domain.product.request;
+package com.study.commerce_lab.adapter.in.webapi.request;
 
 import jakarta.validation.constraints.*;
 

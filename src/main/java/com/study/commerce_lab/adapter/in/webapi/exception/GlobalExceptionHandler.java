@@ -1,5 +1,6 @@
 package com.study.commerce_lab.adapter.in.webapi.exception;
 
+import com.study.commerce_lab.domain.product.exception.StockQuantityExceededException;
 import com.study.commerce_lab.domain.product.exception.DuplicateSkuException;
 import com.study.commerce_lab.domain.product.exception.ProductNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,6 +43,21 @@ public class GlobalExceptionHandler {
                 e.getMessage(),
                 "duplicate-sku",
                 "DUPLICATE_SKU",
+                request
+        );
+    }
+
+    @ExceptionHandler(StockQuantityExceededException.class)
+    public ProblemDetail handleExeedStockQuantity(
+            StockQuantityExceededException e,
+            HttpServletRequest request
+    ){
+        return createProblemDetail(
+                HttpStatus.CONFLICT,
+                "Exceed Stock Quantity",
+                e.getMessage(),
+                "exeed-stock-quantity",
+                "EXCEED_STOCK_QUANTITY",
                 request
         );
     }
