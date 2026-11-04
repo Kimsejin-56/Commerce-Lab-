@@ -38,6 +38,8 @@ public class Product extends BaseEntity {
     }
 
     public void increaseStockQuantity(int stockQuantity){
+        validateQuantity(stockQuantity);
+
         if(this.stockQuantity + stockQuantity > 1000000)
             throw new StockQuantityExceededException("재고 수량 초과입니다.");
 
@@ -45,9 +47,17 @@ public class Product extends BaseEntity {
     }
 
     public void decreaseStockQuantity(int stockQuantity){
+        validateQuantity(stockQuantity);
+
         if (this.stockQuantity < stockQuantity)
             throw new InsufficientStockException("재고가 부족합니다.");
 
         this.stockQuantity-=stockQuantity;
+    }
+
+    private void validateQuantity(int quantity) {
+        if (quantity < 1 || quantity > 1_000_000) {
+            throw new IllegalArgumentException("변경 수량은 1 이상 1,000,000 이하여야 합니다.");
+        }
     }
 }

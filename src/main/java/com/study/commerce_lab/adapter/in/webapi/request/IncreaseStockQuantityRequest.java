@@ -8,6 +8,6 @@ public record IncreaseStockQuantityRequest(
         @NotNull(message = "수량은 필수 입력값입니다.")
         @Min(value = 1, message = "수량은 1 이상이어야 합니다.")
         @Max(value = 1_000_000, message = "수량은 1,000,000 이하이어야 합니다.")
-        int quantity
+        Integer quantity
 ) {
 }

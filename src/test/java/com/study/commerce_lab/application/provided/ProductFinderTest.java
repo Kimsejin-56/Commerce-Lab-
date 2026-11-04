@@ -5,6 +5,7 @@ import com.study.commerce_lab.application.port.out.ProductRepository;
 import com.study.commerce_lab.domain.product.Product;
 import com.study.commerce_lab.adapter.in.webapi.request.ProductRegisterRequest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ class ProductFinderTest {
     ProductRepository productRepository;
 
     @Test
+    @DisplayName("저장한 상품을 ID로 조회할 수 있다")
     void findById(){
         Product product = Product.create(new ProductRegisterRequest("APPLE-1", "아이폰 17", 1200000, 100));
 
