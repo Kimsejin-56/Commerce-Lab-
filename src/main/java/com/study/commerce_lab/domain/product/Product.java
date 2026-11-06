@@ -4,6 +4,7 @@ import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import com.study.commerce_lab.domain.BaseEntity;
 import com.study.commerce_lab.domain.product.exception.InsufficientStockException;
 import com.study.commerce_lab.domain.product.exception.StockQuantityExceededException;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -18,13 +19,17 @@ import org.hibernate.annotations.NaturalId;
 public class Product extends BaseEntity {
 
     @NaturalId
-    String sku;
+    @Column(nullable = false)
+    private String sku;
 
-    String name;
+    @Column(nullable = false, length = 100)
+    private String name;
 
-    int price;
+    @Column(nullable = false)
+    private int price;
 
-    int stockQuantity;
+    @Column(nullable = false)
+    private int stockQuantity;
 
     public static Product create(ProductRegisterRequest request){
         Product product = new Product();
