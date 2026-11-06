@@ -1,7 +1,7 @@
 package com.study.commerce_lab.domain.product;
 
+import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import com.study.commerce_lab.domain.BaseEntity;
-import com.study.commerce_lab.adapter.in.webapi.request.ProductRegisterRequest;
 import com.study.commerce_lab.domain.product.exception.InsufficientStockException;
 import com.study.commerce_lab.domain.product.exception.StockQuantityExceededException;
 import jakarta.persistence.Entity;

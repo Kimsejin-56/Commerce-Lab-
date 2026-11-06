@@ -1,4 +1,4 @@
-package com.study.commerce_lab.adapter.in.webapi.request;
+package com.study.commerce_lab.domain.product.request;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
