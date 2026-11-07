@@ -1,8 +1,8 @@
 package com.study.commerce_lab.domain.product;
 
-import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import com.study.commerce_lab.domain.product.exception.InsufficientStockException;
 import com.study.commerce_lab.domain.product.exception.StockQuantityExceededException;
+import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

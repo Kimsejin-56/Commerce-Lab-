@@ -1,8 +1,8 @@
 package com.study.commerce_lab.application.port.in;
 
-import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import com.study.commerce_lab.domain.product.Product;
 import com.study.commerce_lab.domain.product.exception.DuplicateSkuException;
+import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

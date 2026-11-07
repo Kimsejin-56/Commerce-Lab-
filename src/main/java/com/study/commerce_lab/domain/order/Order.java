@@ -4,13 +4,10 @@ import com.study.commerce_lab.domain.BaseEntity;
 import com.study.commerce_lab.domain.order.enums.OrderStatus;
 import com.study.commerce_lab.domain.product.Product;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -24,7 +21,7 @@ public class Order extends BaseEntity {
     private OrderStatus status;
 
     @Column(nullable = false)
-    private Long totalAmount;
+    private long totalAmount;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude

@@ -1,9 +1,9 @@
 package com.study.commerce_lab.domain.product;
 
-import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import com.study.commerce_lab.domain.BaseEntity;
 import com.study.commerce_lab.domain.product.exception.InsufficientStockException;
 import com.study.commerce_lab.domain.product.exception.StockQuantityExceededException;
+import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.AccessLevel;

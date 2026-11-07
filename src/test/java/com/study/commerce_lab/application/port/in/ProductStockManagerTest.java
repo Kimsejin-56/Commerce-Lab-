@@ -1,12 +1,12 @@
 package com.study.commerce_lab.application.port.in;
 
-import com.study.commerce_lab.domain.product.request.DecreaseStockQuantityRequest;
-import com.study.commerce_lab.domain.product.request.IncreaseStockQuantityRequest;
-import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import com.study.commerce_lab.domain.product.Product;
 import com.study.commerce_lab.domain.product.exception.InsufficientStockException;
 import com.study.commerce_lab.domain.product.exception.ProductNotFoundException;
 import com.study.commerce_lab.domain.product.exception.StockQuantityExceededException;
+import com.study.commerce_lab.domain.product.request.DecreaseStockQuantityRequest;
+import com.study.commerce_lab.domain.product.request.IncreaseStockQuantityRequest;
+import com.study.commerce_lab.domain.product.request.ProductRegisterRequest;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

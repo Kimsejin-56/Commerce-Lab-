@@ -4,18 +4,17 @@ import com.study.commerce_lab.application.port.in.OrderCreater;
 import com.study.commerce_lab.application.port.out.OrderRepository;
 import com.study.commerce_lab.application.port.out.ProductRepository;
 import com.study.commerce_lab.domain.order.Order;
-import com.study.commerce_lab.domain.order.OrderItem;
+import com.study.commerce_lab.domain.order.exception.DuplicateOrderProductException;
 import com.study.commerce_lab.domain.order.request.CreateOrderItemRequest;
 import com.study.commerce_lab.domain.order.request.CreateOrderRequest;
 import com.study.commerce_lab.domain.product.Product;
-import com.study.commerce_lab.domain.product.exception.InsufficientStockException;
 import com.study.commerce_lab.domain.product.exception.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -26,6 +25,8 @@ public class OrderModifyService  implements OrderCreater {
 
     @Override
     public Order createOrder(CreateOrderRequest request) {
+        validateDuplicateProduct(request);
+
         Order order = Order.create();
 
         for(CreateOrderItemRequest item : request.items()){
@@ -38,5 +39,15 @@ public class OrderModifyService  implements OrderCreater {
         }
 
         return orderRepository.save(order);
+    }
+
+    private void validateDuplicateProduct(CreateOrderRequest request) {
+        Set<Long> productIds = new HashSet<>();
+
+        for (CreateOrderItemRequest item : request.items()) {
+            if (!productIds.add(item.productId())) {
+                throw new DuplicateOrderProductException(item.productId());
+            }
+        }
     }
 }
