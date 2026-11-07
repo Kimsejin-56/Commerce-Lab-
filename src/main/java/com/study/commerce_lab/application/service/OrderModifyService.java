@@ -5,8 +5,8 @@ import com.study.commerce_lab.application.port.out.OrderRepository;
 import com.study.commerce_lab.application.port.out.ProductRepository;
 import com.study.commerce_lab.domain.order.Order;
 import com.study.commerce_lab.domain.order.exception.DuplicateOrderProductException;
-import com.study.commerce_lab.domain.order.request.CreateOrderItemRequest;
-import com.study.commerce_lab.domain.order.request.CreateOrderRequest;
+import com.study.commerce_lab.domain.order.request.OrderItemRequest;
+import com.study.commerce_lab.domain.order.request.OrderRequest;
 import com.study.commerce_lab.domain.product.Product;
 import com.study.commerce_lab.domain.product.exception.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -24,12 +24,12 @@ public class OrderModifyService  implements OrderCreater {
     private final OrderRepository orderRepository;
 
     @Override
-    public Order createOrder(CreateOrderRequest request) {
+    public Order createOrder(OrderRequest request) {
         validateDuplicateProduct(request);
 
         Order order = Order.create();
 
-        for(CreateOrderItemRequest item : request.items()){
+        for(OrderItemRequest item : request.items()){
             Product product = productRepository.findById(item.productId())
                     .orElseThrow(() -> new ProductNotFoundException(item.productId()));
 
@@ -41,10 +41,10 @@ public class OrderModifyService  implements OrderCreater {
         return orderRepository.save(order);
     }
 
-    private void validateDuplicateProduct(CreateOrderRequest request) {
+    private void validateDuplicateProduct(OrderRequest request) {
         Set<Long> productIds = new HashSet<>();
 
-        for (CreateOrderItemRequest item : request.items()) {
+        for (OrderItemRequest item : request.items()) {
             if (!productIds.add(item.productId())) {
                 throw new DuplicateOrderProductException(item.productId());
             }

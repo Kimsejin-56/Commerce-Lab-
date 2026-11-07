@@ -1,5 +1,6 @@
 package com.study.commerce_lab.adapter.in.webapi.exception;
 
+import com.study.commerce_lab.domain.order.exception.OrderNotFoundException;
 import com.study.commerce_lab.domain.product.exception.DuplicateSkuException;
 import com.study.commerce_lab.domain.order.exception.DuplicateOrderProductException;
 import com.study.commerce_lab.domain.product.exception.InsufficientStockException;
@@ -90,6 +91,21 @@ public class GlobalExceptionHandler {
                 e.getMessage(),
                 "insufficient-stock-quantity",
                 "INSUFFICIENT_STOCK_QUANTITY",
+                request
+        );
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ProblemDetail handleOrderNotFound(
+            OrderNotFoundException e,
+            HttpServletRequest request
+    ) {
+        return createProblemDetail(
+                HttpStatus.NOT_FOUND,
+                "Order Not Found",
+                e.getMessage(),
+                "order-not-found",
+                "ORDER_NOT_FOUND",
                 request
         );
     }
