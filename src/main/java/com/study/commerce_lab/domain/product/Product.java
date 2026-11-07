@@ -26,7 +26,7 @@ public class Product extends BaseEntity {
     private String name;
 
     @Column(nullable = false)
-    private int price;
+    private long price;
 
     @Column(nullable = false)
     private int stockQuantity;

@@ -25,7 +25,7 @@ class ProductTest {
     void create() {
         assertThat(product).isNotNull();
         assertThat(product.getSku()).isEqualTo("APPLE-1");
-        assertThat(product.getPrice()).isEqualTo(1200000);
+        assertThat(product.getPrice()).isEqualTo(1_200_000L);
         assertThat(product.getName()).isEqualTo("아이폰 17");
         assertThat(product.getStockQuantity()).isEqualTo(100);
     }

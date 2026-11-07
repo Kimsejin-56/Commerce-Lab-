@@ -24,6 +24,7 @@ public class Order extends BaseEntity {
     private long totalAmount;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderColumn(name = "item_position")
     @ToString.Exclude
     private final List<OrderItem> items = new ArrayList<>();
 

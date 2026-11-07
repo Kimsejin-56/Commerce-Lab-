@@ -6,7 +6,7 @@ public record ProductRegisterResponse(
         Long id,
         String sku,
         String name,
-        int price,
+        long price,
         int stockQuantity
 ) {
     public static ProductRegisterResponse from(Product product) {

@@ -14,7 +14,7 @@ public record ProductRegisterRequest(
 
     @Min(value = 100, message = "가격은 100원 이상이어야 합니다.")
     @Max(value = 100_000_000, message = "가격은 100,000,000원 이하여야 합니다.")
-    int price,
+    long price,
 
     @Min(value = 0, message = "재고는 0개 이상이어야 합니다.")
     @Max(value = 1_000_000, message = "재고는 1,000,000개 이하여야 합니다.")

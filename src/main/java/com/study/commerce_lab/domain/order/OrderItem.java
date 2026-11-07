@@ -39,7 +39,7 @@ public class OrderItem extends BaseEntity {
         this.quantity = quantity;
         this.product = product;
         this.order = order;
-        this.lineAmount = quantity * product.getPrice();
+        this.lineAmount = unitPrice * quantity;
     }
 
     public static OrderItem create(Order order, Product product, int quantity) {
